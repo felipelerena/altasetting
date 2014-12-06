@@ -17,6 +17,8 @@ class SettingsNode(object):
         value = self.children
         try:
             value = self.children[key]
+            if not hasattr(value.children, "__iter__") and "name" in self.children:
+                value = value.children
         except TypeError:
             pass
         except KeyError:
@@ -63,13 +65,3 @@ class Settings(object):
             settings = yaml.load(file_.read())
 
         return settings
-
-
-if __name__ == '__main__':
-    settings = Settings("/home/felipe/.touchandgo/settings.yaml",
-                        "/home/felipe/devel/touchandgo/touchandgo/templates/settings.yaml")
-    print settings.limits
-    print settings.limits.download
-    print settings.strategy.always_sequential
-
-
