@@ -62,6 +62,6 @@ class Settings(object):
 
     def _load_file(self, file_name):
         with open(file_name, 'r') as file_:
-            settings = yaml.load(file_.read())
+            settings = yaml.load(file_.read(), Loader=yaml.FullLoader)
 
         return settings
